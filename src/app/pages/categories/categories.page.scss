@@ -1,0 +1,42 @@
+ion-grid{
+    
+    padding:2px;
+   
+    ion-col{
+        padding:2px;
+    }
+    ion-button{
+        &.button{
+            --border-radius: 0px;
+            --box-shadow:none;
+            outline: none!important;
+            height: auto;
+            margin:0px;
+            border-radius:0px;
+             height:150px;
+            .container{
+                flex-direction: column;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding:20px var(--content-padding);
+                img{
+                    max-height:50px;
+                }
+                p{
+                    color: var(--ion-color-primary);
+                    margin:4px 0px 0px 0px;
+                    font-size:1.3rem!important;
+                    font-weight: bold;
+                    text-transform: initial;
+                }
+                .tarif{
+                    font-size:1.0rem!important;
+                    color: #000;
+                }
+            }
+        }
+    }
+
+}
+

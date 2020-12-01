@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'details' | translate}} {{'facture' | translate}} [{{item.ref}}]
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="printable-content">
+    <div class="printable-area" id="printable-area1">
+      <h1 style="margin-left: 5px;">{{'details' | translate}} {{'facture' | translate}}</h1>
+      <table style="margin: 2%; width: 96%;border-spacing : 0;">
+        <tr>
+          <td width="30%" style="vertical-align: top;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Client:</dt>
+            <dd style="margin: 0;">{{item.abonneName}}</dd>
+            <dd style="margin: 0;">Tél:{{item.abonneTel}}</dd>
+            <dd style="margin: 0;">{{item.abonneAdresse}}</dd>
+          </td>
+          <td width="20%" style="vertical-align: top;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Réf:</dt>
+            <dd style="margin: 0;">{{item.ref}}</dd>
+          </td>
+          <td width="50%" style="vertical-align: top;text-align: right;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Montant Total:</dt>
+            <dd style="margin: 0;font-size: 20px;font-weight: bold;">{{item.montant | number :'1.0-2'}} FCFA</dd>
+          </td>
+        </tr>
+      </table>
+
+      <table style="margin: 2%; width: 96%;border-spacing : 0;">
+        <tr>
+          <th width="15%"
+            style="text-align: left;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000; "> DATE</th>
+          <th width="15%"
+            style="text-align: left;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+            REF.</th>
+          <th width="55%"
+            style="text-align: left;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+            {{'description' | translate | uppercase}}</th>
+          <th width="15%"
+            style=" text-align: right;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+            {{'montant' | translate | uppercase}}</th>
+        </tr>
+        <tr *ngFor="let it of items">
+          <td width="15%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;">
+            {{it.datec | date:'dd/MM/yy'}}</td>
+          <td width="15%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;"> {{it.ref}}</td>
+          <td width="40%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;"> {{it.categorieName}}
+          </td>
+          <td width="15%" style=" text-align: right;padding: 4px;border-bottom: 1px solid #000;">
+            {{it.prix | number :'1.0-2'}}</td>
+        </tr>
+        <tr>
+          <td width="15%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;"> </td>
+          <td width="15%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;"></td>
+          <td width="55%" style="text-align: right;padding: 4px;border-bottom: 1px solid #000;font-weight: bold;">
+            {{'total' | translate | uppercase}}</td>
+          <td width="15%" style=" text-align: right;padding: 4px;border-bottom: 1px solid #000;font-weight: bold;">
+            {{item.montant | number :'1.0-2'}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-content>

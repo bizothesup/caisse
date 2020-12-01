@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'factures' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="periode-line">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" style="text-align: center;">
+      <ion-label style=" text-align: center;">{{periode}}</ion-label>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="forward()">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-virtual-scroll *ngIf="items.length !== 0" class="app_virtual_list" [items]="items" approxItemHeight="340px"
+    no-padding>
+    <ion-card *virtualItem="let item; let itemBounds = bounds;">
+      <ion-card-content (click)="showItem(item)">
+        <ion-grid class="item_footer">
+          <ion-row>
+            <ion-col size="auto">
+              <div id="date">
+                <p class="jour"> {{item.datec  | date:'dd'}}</p>
+              </div>
+            </ion-col>
+            <ion-col>
+              <ion-text>
+                <h4>{{item.ref}} - {{item.abonneName}} </h4>
+                <p>{{'periode' | translate}} du {{item.dated  | date:'dd/MM/yyyy'}} au
+                  {{item.datef  | date:'dd/MM/yyyy'}}</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-text>
+                <p><span class="montant">{{item.montant | number :'1.0-2'}}</span> <span class="devise">FCFA</span></p>
+                <p><span class="green" *ngIf="item.payer==='true'"><i>
+                      {{'paye' | translate}}</i></span><span class="red" *ngIf="item.payer==='false'">
+                    <i>{{'non_paye' | translate}}</i></span></p>
+              </ion-text>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-virtual-scroll>
+
+  <div class="no_items" *ngIf="items.length == 0">
+    <ion-icon name="paper" color="primary"></ion-icon>
+    <ion-text color="secondary">
+      <p>{{'empty_factures' | translate}}</p>
+    </ion-text>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/factures/newFac']"
+    routerDirection="forward" type="button">
+    {{'add_facture' | translate | uppercase}}</ion-button>
+
+</ion-footer>

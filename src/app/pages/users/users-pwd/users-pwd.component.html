@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'password' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="sign_content">
+  <div class="container">
+    <img src="assets/imgs/logo-login.png" />
+    <form class="login_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+      <ion-item>
+        <ion-icon name="lock" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'oldpassword' | translate}}" type="password" formControlName="oldpassword">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.password">
+          <div class="error-message"
+            *ngIf="validations_form.get('oldpassword').hasError(validation.type) && (validations_form.get('oldpassword').dirty || validations_form.get('oldpassword').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Password -->
+      <div formGroupName="matching_passwords">
+        <ion-item>
+          <ion-icon name="lock" slot="start" color="secondary" margin-end></ion-icon>
+          <ion-input placeholder="{{'nouveau_password' | translate}}" type="password" formControlName="password">
+          </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of global.validation_messages.password">
+            <div class="error-message"
+              *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty || validations_form.get('matching_passwords').get('password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-icon name="lock" slot="start" color="secondary" margin-end></ion-icon>
+          <ion-input type="password" placeholder="{{'retype_password' | translate}}" formControlName="confirm_password">
+          </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of global.validation_messages.confirm_password">
+            <div class="error-message"
+              *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <!-- These validations are for the Password form group -->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.matching_passwords">
+          <div class="error-message"
+            *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+
+      <ion-button expand="full" type="submit" [disabled]="!validations_form.valid" routerDirection="forward">
+        {{'update' | translate}}
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

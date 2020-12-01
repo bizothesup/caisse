@@ -1,0 +1,7 @@
+{
+  "name": "smart-caisse",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

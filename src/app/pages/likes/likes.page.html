@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'likes' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button ion-activatable (click)="global.search($event)"  >
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="search"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/notifications']" routerDirection="root">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-list class="app_list" no-padding  *ngIf="top_news.length != 0" >
+
+    <ion-item *ngFor="let item of top_news" [routerLink]="['/details',{ video:false}]" routerDirection="forward" >
+      <img src="{{item.img}}" /> 
+      <ion-label>
+        <ion-text color="light">
+          <span class="category">{{item['category_' + global.lang]}}</span>
+          <h4>{{item['title_' + global.lang]}}</h4>
+          <p>{{item['details_' + global.lang]}}</p>
+        </ion-text>
+        <ion-grid class="item_footer">
+          <ion-row>
+            <ion-col>
+              <ion-text color="primary">
+                <p>{{item['time_' + global.lang]}}</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-button fill="clear"  color="light">
+                <ion-icon slot="start" name="eye" color="light"></ion-icon>
+                180
+              </ion-button>
+
+            </ion-col>
+            <ion-col size="auto">
+              <ion-button fill="clear" color="primary"   >
+                <ion-icon slot="start" name="thumbs-up" ></ion-icon>
+                180
+              </ion-button>
+
+            </ion-col>
+            <ion-col size="auto">
+              <ion-button fill="clear" color="light" (click)="dislike(item)" [color]="item.disLiked ? 'primary' :  'light'">
+                <ion-icon slot="start" name="thumbs-down"  ></ion-icon>
+                180
+              </ion-button> 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+  <div class="no_items" *ngIf="top_news.length == 0">
+    <ion-icon name="heart-dislike" color="primary"></ion-icon>
+    <ion-text color="secondary">
+      <p>{{'empty_likes' | translate}}</p>
+    </ion-text>
+  </div>
+</ion-content>

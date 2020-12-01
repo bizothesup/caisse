@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" *ngIf="mode === 'new'">
+      {{'nouvelle_categorie' | translate}}
+    </ion-title>
+    <ion-title color="light" *ngIf="mode === 'edit'">
+      {{'categorie' | translate}} [{{categorie.nom}}]
+    </ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form class="cat_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)" #myForm="ngForm">
+    <!-- nom-->
+    <ion-item>
+      <ion-label position="stacked">{{'nom' | translate }}</ion-label>
+      <ion-input formControlName="nom" placeholder="{{'nom' | translate }}" type="text" name="nom">
+      </ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.nom">
+        <div class="error-message"
+          *ngIf="validations_form.get('nom').hasError(validation.type) && (validations_form.get('nom').dirty || validations_form.get('nom').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+    <!-- tarif-->
+    <ion-item>
+      <ion-label position="stacked">{{'tarif' | translate }}</ion-label>
+      <ion-input formControlName="tarif" placeholder="{{'tarif' | translate }}" type="number" name="tarif">
+      </ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.tarif">
+        <div class="error-message"
+          *ngIf="validations_form.get('tarif').hasError(validation.type) && (validations_form.get('tarif').dirty || validations_form.get('tarif').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+    <!-- Select couleur -->
+    <ion-item>
+      <ion-label position="stacked">{{'couleur' | translate }}</ion-label>
+      <ion-select formControlName="color" interface="action-sheet" okText="Ok">
+        <ion-select-option *ngFor="let item of global.colors" [value]="item.code"><span
+            [ngStyle]="{'color': item.nom}">Couleur
+            {{item.nom}}</span>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </form>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row *ngIf="mode === 'new'">
+      <ion-col size="12">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'save' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode === 'edit'">
+      <ion-col size="12">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'update' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

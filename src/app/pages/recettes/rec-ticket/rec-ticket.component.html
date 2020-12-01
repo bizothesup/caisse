@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'ticket' | translate}}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="send()">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="printable-content">
+    <div class="printable-area" id="printable-area">
+      <table style="margin: 2%; width: 96%;font-size: 12px;">
+        <tr>
+          <td style="text-align: center;padding: 5px 20px;font-size: 16px;font-weight: bold;text-transform: uppercase;">
+            {{structure.nom}}</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;padding: 0px;">Tél: {{structure.tel}}</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;padding: 0px;">{{structure.address1}}</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;padding: 0px;">{{structure.address2}}</td>
+        </tr>
+
+      </table>
+
+      <table style="margin: 2%; width: 96%;border-top: 1px solid #000; border-bottom: 1px solid #000;font-size: 12px;">
+        <tr>
+          <th width="20%" style="text-align: left;padding: 2px; border-bottom: 1px solid #000;"> Ref.</th>
+          <th width="60%" style="text-align: left;padding: 2px; border-bottom: 1px solid #000;">
+            {{'description' | translate }}</th>
+          <th width="20%" style=" text-align: right;padding: 2px; border-bottom: 1px solid #000;">
+            {{'montant' | translate}}</th>
+        </tr>
+        <tr>
+          <td style="text-align: left;padding: 2px;">{{recette.ref}}</td>
+          <td style="text-align: left;padding: 2px;"> {{recette.categorieName}}</td>
+          <td style=" text-align: right;padding: 2px;">{{recette.prix| number :'1.0-2'}}</td>
+        </tr>
+
+      </table>
+      <table style="margin: 2%; width: 96%;font-size: 12px;">
+        <tr>
+          <td width="80%" style="padding: 2px; text-align: right;font-weight: bold;">
+            {{'total' | translate | uppercase}}: </td>
+          <td width="20%" style="padding: 2px; text-align: right;font-weight: bold;">{{recette.prix| number :'1.0-2'}}
+          </td>
+        </tr>
+        <tr>
+          <td width="80%" style="padding: 2px; text-align: right;font-weight: bold;">
+          </td>
+          <td width="20%" style="padding: 2px; text-align: right;font-weight: bold;"><span
+              *ngIf="recette.payer">PAYE</span>
+            <span *ngIf="!recette.payer">NON PAYE</span>
+          </td>
+        </tr>
+      </table>
+
+      <table style="margin: 4% 2% 2% 2% ; width: 96%;font-size: 12px;">
+        <tr *ngIf="global.file_attente">
+          <td width="100%" style="padding: 2px;text-align: center;">Il reste <strong><span
+                style="font-size: 16px;">{{nbfil}}</span></strong> personne(s) avant
+            vous!!!</td>
+        </tr>
+        <tr>
+          <td width="100%" style="padding: 2px;text-align: center;font-weight: bold;">MERCI A BIENTOT</td>
+        </tr>
+        <tr>
+          <td width="100%" style="padding: 2px;text-align: center; font-size: 10px;">Ticket imprimé le
+            {{ cdate | date:'dd/MM/yyyy à HH:mm' }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-content>

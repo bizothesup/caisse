@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'home' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button ion-activatable (click)="search($event)">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="search"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/rapports']" routerDirection="root">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="stats"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar no-padding class="scrolling_toolbar">
+    <ion-segment scrollable [(ngModel)]="mySegment">
+      <ion-segment-button value="recettes">
+        {{'recettes' | translate | uppercase}}
+      </ion-segment-button>
+      <ion-segment-button value="depenses">
+        {{'depenses' | translate | uppercase}}
+      </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+  <ion-toolbar class="periode-line">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" style="text-align: center;">
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="curDate" (ionChange)="change_dateValue()">
+      </ion-datetime>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="forward()">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home" [ngSwitch]="mySegment">
+
+  <app-rec-list *ngSwitchCase="'recettes'" [curDate]="curDate"></app-rec-list>
+  <app-dep-list *ngSwitchCase="'depenses'" [curDate]="curDate"></app-dep-list>
+
+
+</ion-content>
+<ion-footer class="ion-no-border" [ngSwitch]="mySegment">
+  <ion-list *ngSwitchCase="'recettes'">
+    <ion-item lines="none">
+      <h3 class="total-label">{{'total' | translate | uppercase}} : </h3>
+      <h3 class="total-montant"> {{totRecette| number :'1.0-2'}} <span class="devise">FCFA</span></h3>
+    </ion-item>
+    <ion-item lines="none">
+      <h3 class="total-label">{{'encaisse' | translate | uppercase}} : </h3>
+      <h3 class="total-montant"> {{totEncaisse| number :'1.0-2'}} <span class="devise">FCFA</span></h3>
+    </ion-item>
+
+    <ion-item class="actions" lines="none">
+      <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/home/newRec']"
+        routerDirection="forward" type="button">
+        {{'ajourer_recette' | translate | uppercase}}</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngSwitchCase="'depenses'">
+    <ion-item lines="none">
+      <h3 class="total-label">{{'total' | translate | uppercase}} : </h3>
+      <h3 class="total-montant"> {{totDepense| number :'1.0-2'}} <span class="devise">FCFA</span></h3>
+    </ion-item>
+    <ion-item lines="none">
+      <h3 class="total-label">{{'paye' | translate | uppercase}} : </h3>
+      <h3 class="total-montant"> {{totPaye| number :'1.0-2'}} <span class="devise">FCFA</span></h3>
+    </ion-item>
+    <ion-item class="actions">
+      <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/home/newDep']"
+        routerDirection="forward" type="button">
+        {{'ajourer_depense' | translate | uppercase}}</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-footer>

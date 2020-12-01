@@ -1,0 +1,32 @@
+.item_footer{
+    margin-top:0px;
+    padding:0px var(--content-padding);
+    .button{
+        padding-left: unset;
+        padding-right: unset;
+        -webkit-padding-start: var(--padding-start);
+        padding-inline-start: var(--padding-start);
+        -webkit-padding-end: var(--padding-end);
+        padding-inline-end: var(--padding-end);
+    }
+}
+.img_cover{
+    img{
+        max-height:50vh;
+        object-fit: cover;
+    }
+}
+ 
+.myVideo{
+    width: 100%;
+    max-height: 35vh;
+}
+// :host {
+//     ::slotted(div){
+//     align-items: flex-start!important;
+//   }
+// }
+ 
+:host(.button-native){
+    background: #ff0!important;
+}

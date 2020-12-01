@@ -1,0 +1,61 @@
+<ion-content class="sign_content">
+  <div class="container">
+    <ion-button color="primary" class="lang_btn" (click)="change_lang()">{{'lang' | translate}}</ion-button>
+    <img src="assets/imgs/logo-login.png" />
+    <ion-label class="slogan">{{'slogan' | translate }}</ion-label>
+    <ion-label *ngIf="licenceTYPE==='E'" class="eval">{{'version_evaluation' | translate }}</ion-label>
+    <ion-label *ngIf="licenceTYPE==='E'" class="enreg">{{nbeng}} {{'enregistrement_disponible' | translate }}
+    </ion-label>
+    <ion-button *ngIf="licenceTYPE==='E'" routerDirection="forward" fill="clear" expand="block" color="light"
+      type="button" [routerLink]="['/activation']">
+      {{'activer' | translate}}
+    </ion-button>
+    <form class="login_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+
+      <!-- Login -->
+      <ion-item>
+        <ion-label position="stacked">{{'utilistateur' | translate }}</ion-label>
+        <ion-select formControlName="login" interface="action-sheet"
+          placeholder="{{'selectionnez_utilistateur' | translate}}">
+          <ion-select-option *ngFor="let item of users" [value]="item.id">{{item.pseudo}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+      <!-- password -->
+      <ion-item>
+        <ion-label position="stacked">{{'mot_de_passe' | translate }}</ion-label>
+        <ion-input placeholder="{{'saisisez_mot_de_passe' | translate}}" type="password" formControlName="password">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.pin">
+          <div class="error-message"
+            *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-button fill="clear" expand="block" color="light" type="button" (click)="forgot_password()">
+        {{'forgot_passowrd' | translate}}</ion-button>
+      <ion-button *ngIf="licenceTYPE==='E' && nbeng>0" expand="full" type="submit" [disabled]="!validations_form.valid"
+        routerDirection="forward">
+        {{'login' | translate}}
+      </ion-button>
+      <ion-button *ngIf="licenceTYPE==='E' && nbeng<=0" expand="full" routerDirection="forward" type="button"
+        [routerLink]="['/activation']">
+        {{'activer' | translate}}
+      </ion-button>
+      <ion-button *ngIf="licenceTYPE!=='E'" expand="full" type="submit" [disabled]="!validations_form.valid"
+        routerDirection="forward">
+        {{'login' | translate}}
+      </ion-button>
+    </form>
+    <!-- <ion-button fill="clear" expand="block" color="light" [routerLink]="['/sign-up']" routerDirection="forward" type="button">{{'not_account' | translate}}</ion-button>
+    <ion-button extpand="full" color="primary" [routerLink]="['/home']" routerDirection="root" type="button" class="skip_btn">{{'skip' | translate}}</ion-button> -->
+
+  </div>
+</ion-content>

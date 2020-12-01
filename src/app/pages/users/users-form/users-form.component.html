@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" *ngIf="mode === 'new'">
+      {{'add_utilisateur' | translate}}
+    </ion-title>
+    <ion-title color="light" *ngIf="mode === 'edit'">
+      {{'utilisateur' | translate}} [{{user.pseudo}}]
+    </ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form class="cat_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)" #myForm="ngForm">
+    <!-- nom-->
+    <ion-item>
+      <ion-icon name="person" slot="start" color="secondary" margin-end></ion-icon>
+      <ion-input formControlName="pseudo" placeholder="{{'pseudo' | translate }}" type="text" name="nom">
+      </ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.nom">
+        <div class="error-message"
+          *ngIf="validations_form.get('pseudo').hasError(validation.type) && (validations_form.get('pseudo').dirty || validations_form.get('pseudo').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+
+
+
+    <ion-item>
+      <ion-icon name="call" slot="start" color="secondary" margin-end></ion-icon>
+      <ion-input formControlName="tel" placeholder="{{'phone_number' | translate }}" type="text" name="tel"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.phone">
+        <div class="error-message"
+          *ngIf="validations_form.get('tel').hasError(validation.type) && (validations_form.get('tel').dirty || validations_form.get('tel').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start" color="secondary" margin-end></ion-icon>
+      <ion-input formControlName="email" placeholder="{{'email' | translate }}" type="email" name="email">
+      </ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.email">
+        <div class="error-message"
+          *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Password -->
+    <div formGroupName="matching_passwords">
+      <ion-item>
+        <ion-icon name="lock" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input [disabled]="disable_val" placeholder="{{'password' | translate}}" type="password"
+          formControlName="password"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.password">
+          <div class="error-message"
+            *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty || validations_form.get('matching_passwords').get('password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-icon name="lock" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input [disabled]="disable_val" type="password" placeholder="{{'retype_password' | translate}}"
+          formControlName="confirm_password">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.confirm_password">
+          <div class="error-message"
+            *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!-- These validations are for the Password form group -->
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.matching_passwords">
+        <div class="error-message"
+          *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-icon name="settings" slot="start" color="secondary" margin-end></ion-icon>
+      <ion-label>{{'est_administrateur' | translate }} ?</ion-label>
+      <ion-toggle formControlName="estadmin"></ion-toggle>
+    </ion-item>
+
+
+  </form>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row *ngIf="mode === 'new'">
+      <ion-col size="12">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'save' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode === 'edit'">
+      <ion-col size="12">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'update' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

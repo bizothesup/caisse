@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"> 
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+     
+    <ion-title color="light">
+      {{'details' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="share()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="share"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/notifications']" routerDirection="root">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="item_footer">
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <p>{{details['time_' + global.lang]}}</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button fill="clear" color="secondary" disabled="true">
+          <ion-icon slot="start" name="eye"></ion-icon>
+          180
+        </ion-button>
+
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button fill="clear" (click)="like()" [color]="liked ? 'primary' :  'secondary'">
+          <ion-icon slot="start" name="thumbs-up"></ion-icon>
+          180
+        </ion-button>
+
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button fill="clear" (click)="dislike()" [color]="disLiked ? 'primary' :  'secondary'">
+          <ion-icon slot="start" name="thumbs-down"></ion-icon>
+          180
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card class="details">
+
+    <div class="img_cover" *ngIf="video_case == 'false'">
+      <img src="assets/imgs/001.png" />
+      <span class="category">{{details['category_' + global.lang]}}</span>
+    </div> 
+
+    <video class="myVideo" (autoplay)="false" controls *ngIf="video_case == 'true'">
+      <source src="{{video}}">
+    </video>
+
+
+    <ion-card-content>
+      <ion-card-title>
+        {{details['title_' + global.lang]}}
+      </ion-card-title>
+      <p>
+        {{details['details_' + global.lang]}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="comments">
+    <ion-list>
+      <ion-item *ngFor="let item of comments">
+        <ion-avatar slot='start'>
+          <img src="{{item.img}}" />
+        </ion-avatar>
+        <div class="item_container">
+          <h4>{{item['name_' + global.lang]}}</h4>
+          <p class="comment">
+            {{item['comment_' + global.lang]}}
+          </p>
+
+          <ion-grid class="item_footer">
+            <ion-row>
+              <ion-col>
+                <ion-text color="primary">
+                  <p>{{item['time_' + global.lang]}}</p>
+                </ion-text>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear" color="secondary" disabled="true">
+                  <ion-icon slot="start" name="eye"></ion-icon>
+                  10
+                </ion-button>
+
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear" (click)="like()" [color]="liked ? 'primary' :  'secondary'">
+                  <ion-icon slot="start" name="thumbs-up"></ion-icon>
+                  2
+                </ion-button>
+
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear" (click)="dislike()" [color]="disLiked ? 'primary' :  'secondary'">
+                  <ion-icon slot="start" name="thumbs-down"></ion-icon>
+                  18
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div class="add_comment">
+        <ion-item> 
+          <ion-textarea rows="3"  placeholder="{{'type_your_comment' | translate}}"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" color="primary">{{'add_comment' | translate}}</ion-button>
+    </div>
+
+  </div>
+
+
+</ion-content>

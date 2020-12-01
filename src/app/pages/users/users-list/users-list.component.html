@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'utilistateurs' | translate}}
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="items.length != 0">
+    <ion-item-sliding *ngFor="let item of items">
+
+      <ion-item (click)="showItem(item)">
+        <ion-label>
+          <h4>{{ item.pseudo }}</h4>
+          <p><span class="montant">{{item.tel}}</span></p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <button danger (click)="deleteItem(item)" class="btn-delete">
+          <ion-icon name="trash"></ion-icon>
+          {{ 'DELETE' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <div class="no_items" *ngIf="items.length == 0">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/users/newUser']"
+    routerDirection="forward" type="button">
+    {{'add_utilisateur' | translate | uppercase}}</ion-button>
+
+</ion-footer>

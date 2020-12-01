@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'infos_commerce' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button ion-activatable (click)="global.search($event)">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="search"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/notifications']" routerDirection="root">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" color="light" name="notifications"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-avatar>
+      <img src="{{img}}" />
+      <ion-button color="primary" (click)=" selectImage()">
+        <ion-icon name="camera" slot="icon-only" color="light"></ion-icon>
+      </ion-button>
+    </ion-avatar>
+
+    <ion-card-content>
+      <ion-text color="secondary">
+        <h4>{{structure.nom}}</h4>
+        <h4 *ngIf="structure.nature==='C'">{{'commerce_general' | translate}}</h4>
+        <h4 *ngIf="structure.nature==='P'">{{'prestation_service' | translate}}</h4>
+      </ion-text>
+      <ion-text color="secondary-tint">
+        <p>{{structure.tel}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <form class="profile_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+    <!-- commerce -->
+    <ion-item>
+      <ion-label position="stacked">{{'nom_commerce' | translate }}</ion-label>
+      <ion-input formControlName="nom" placeholder="{{'nom_commerce' | translate }}" type="text"
+        [disabled]="disable_val"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.nom">
+        <div class="error-message"
+          *ngIf="validations_form.get('nom').hasError(validation.type) && (validations_form.get('nom').dirty || validations_form.get('nom').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Téléphone -->
+    <ion-item>
+      <ion-label position="stacked">{{'phone_number' | translate }}</ion-label>
+      <ion-input formControlName="tel" placeholder="{{'phone_number' | translate }}" type="text"
+        [disabled]="disable_val" name="tel"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.phone">
+        <div class="error-message"
+          *ngIf="validations_form.get('tel').hasError(validation.type) && (validations_form.get('tel').dirty || validations_form.get('tel').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- E-mail -->
+    <ion-item>
+      <ion-label position="stacked">{{'email' | translate }}</ion-label>
+      <ion-input placeholder="{{'email' | translate }}" formControlName="email" type="email" name="email"
+        [disabled]="disable_val"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.email">
+        <div class="error-message"
+          *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Address  -->
+    <ion-item>
+      <ion-label position="stacked">{{'address1' | translate }}</ion-label>
+      <ion-input formControlName="address1" placeholder="{{'address1' | translate }}" type="text"
+        [disabled]="disable_val" disabled=true></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.address">
+        <div class="error-message"
+          *ngIf="validations_form.get('address1').hasError(validation.type) && (validations_form.get('address1').dirty || validations_form.get('address1').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">{{'address2' | translate }}</ion-label>
+      <ion-input formControlName="address2" placeholder="{{'address2' | translate }}" type="text"
+        [disabled]="disable_val" disabled=true></ion-input>
+    </ion-item>
+
+
+
+    <ion-button color="secondary" class="submit-btn" expand="full" (click)="update()" type="button" *ngIf="disable_val">
+      {{'update' | translate}}</ion-button>
+    <ion-button color="primary" class="submit-btn" expand="full" type="submit" *ngIf="!disable_val">
+      {{'save' | translate}}</ion-button>
+  </form>
+
+
+
+</ion-content>

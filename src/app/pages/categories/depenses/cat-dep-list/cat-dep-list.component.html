@@ -1,0 +1,26 @@
+<ion-list *ngIf="items.length != 0">
+  <ion-item-sliding *ngFor="let item of items">
+
+    <ion-item (click)="showItem(item)">
+      <div id="cercle" [ngStyle]="{'background-color': item.color}">
+
+      </div>
+      <ion-label>
+        <h4>{{ item.nom }}</h4>
+        <p *ngIf="item.frequence === 'R'"><span class="montant">{{item.tarif | number :'1.0-2'}}</span> <span
+            class="devise">FCFA</span></p>
+        <p *ngIf="item.frequence !== 'R'"><span class="montant"> {{ 'ponctuelle' | translate }}</span></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <button danger (click)="deleteItem(item)" class="btn-delete">
+        <ion-icon name="trash"></ion-icon>
+        {{ 'DELETE' | translate }}
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+<div class="no_items" *ngIf="items.length == 0">
+  <ion-spinner></ion-spinner>
+</div>

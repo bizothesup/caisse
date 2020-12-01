@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" *ngIf="mode === 'new'">
+      {{'nouvelle_recette' | translate}}
+    </ion-title>
+
+    <ion-title color="light" *ngIf="mode === 'edit'">
+      {{'recette' | translate}} [{{recette.ref}}]
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="print()" *ngIf="mode === 'edit'">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <form class="profile_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)"
+    #myForm="ngForm">
+
+    <ion-item>
+      <ion-label position="stacked">{{'categorie' | translate }}</ion-label>
+      <ion-select formControlName="categorie" interface="action-sheet" (ngModelChange)="onChangeCat($event)">
+        <ion-select-option *ngFor="let item of categories" [value]="item.id">{{item.nom}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{'abonne' | translate }}</ion-label>
+      <ion-select formControlName="abonne" interface="action-sheet" (ngModelChange)="onChangeAbn($event)">
+        <ion-select-option *ngFor="let item of abonnes" [value]="item.id">{{item.nom}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{'montant' | translate }}</ion-label>
+      <ion-input formControlName="tarif" placeholder="{{'montant' | translate }}" type="number" name="tarif">
+      </ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.tarif">
+        <div class="error-message"
+          *ngIf="validations_form.get('tarif').hasError(validation.type) && (validations_form.get('tarif').dirty || validations_form.get('tarif').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">{{'reference' | translate }}</ion-label>
+      <ion-input formControlName="reference" placeholder="{{'reference' | translate }}" type="text" name="reference">
+      </ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.reference">
+        <div class="error-message"
+          *ngIf="validations_form.get('reference').hasError(validation.type) && (validations_form.get('reference').dirty || validations_form.get('reference').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <ion-item>
+      <ion-label position="stacked">{{'phone_number' | translate }}</ion-label>
+      <ion-input placeholder="{{'phone_number' | translate }}" formControlName="tel" type="text" name="tel">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{'prestation_payee' | translate }} ?</ion-label>
+      <ion-toggle formControlName="paye"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="structure.nature==='P'">
+      <ion-label>{{'prestation_effectuee' | translate }} ?</ion-label>
+      <ion-toggle formControlName="termine"></ion-toggle>
+    </ion-item>
+
+  </form>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row *ngIf="mode === 'new'">
+      <ion-col size="12">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'save' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode === 'edit'">
+      <ion-col size="6">
+        <ion-button color="secondary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm.ngSubmit.emit()">
+          {{'update' | translate}}</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="primary" expand="full" (click)="deleteItem()">
+          {{'delete' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

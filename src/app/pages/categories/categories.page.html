@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'categories' | translate}}
+    </ion-title>
+
+  </ion-toolbar>
+  <ion-toolbar no-padding class="scrolling_toolbar">
+    <ion-segment scrollable [(ngModel)]="mySegment">
+      <ion-segment-button value="recettes">
+        {{'recettes' | translate | uppercase}}
+      </ion-segment-button>
+      <ion-segment-button value="depenses">
+        {{'depenses' | translate | uppercase}}
+      </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [ngSwitch]="mySegment">
+  <app-cat-rec-list *ngSwitchCase="'recettes'"></app-cat-rec-list>
+  <app-cat-dep-list *ngSwitchCase="'depenses'"></app-cat-dep-list>
+</ion-content>
+<ion-footer class="ion-no-border" [ngSwitch]="mySegment">
+  <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/categories/newCatRec']"
+    *ngSwitchCase="'recettes'" routerDirection="forward" type="button">
+    {{'ajourer_categorie' | translate | uppercase}}</ion-button>
+  <ion-button color="secondary" class="submit-btn" expand="full" [routerLink]="['/categories/newCatDep']"
+    *ngSwitchCase="'depenses'" routerDirection="forward" type="button">
+    {{'ajourer_categorie' | translate | uppercase}}</ion-button>
+</ion-footer>

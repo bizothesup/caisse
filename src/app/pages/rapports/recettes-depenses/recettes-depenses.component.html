@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'Recettes vs Dépenses' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="printable-area" id="printable-area">
+
+    <table style="margin: 20px 0px 0px 0px; width: 100%;border-spacing : 0;">
+      <tr>
+        <th width="80%" style="text-align: left;padding: 4px;">
+          {{'aujourd' | translate | uppercase}} ({{jour}})</th>
+        <th width="20%" style=" text-align: right;">
+        </th>
+
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'recettes' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;"> {{rj | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'depenses' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;">{{dj | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;padding: 4px;"></td>
+        <td style=" text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">
+          {{tj | number :'1.0-2'}}
+        </td>
+      </tr>
+    </table>
+
+    <table style="margin: 20px 0px 0px 0px; width: 100%;border-spacing : 0;">
+      <tr>
+        <th width="80%" style="text-align: left;padding: 4px;">
+          {{'sept_derniers_jours' | translate | uppercase}} ({{semaine}})</th>
+        <th width="20%" style=" text-align: right;">
+        </th>
+
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'recettes' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;"> {{rs | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'depenses' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;">{{ds | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;padding: 4px;"></td>
+        <td style=" text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">
+          {{ts | number :'1.0-2'}}
+        </td>
+      </tr>
+    </table>
+
+    <table style="margin: 20px 0px 0px 0px; width: 100%;border-spacing : 0;">
+      <tr>
+        <th width="80%" style="text-align: left;padding: 4px;">
+          {{'ce_mois_ci' | translate | uppercase}} ({{mois}})</th>
+        <th width="20%" style=" text-align: right;">
+        </th>
+
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'recettes' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;"> {{rm | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'depenses' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;">{{dm | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;padding: 4px;"></td>
+        <td style=" text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">
+          {{tm | number :'1.0-2'}}
+        </td>
+      </tr>
+    </table>
+
+    <table style="margin: 20px 0px 0px 0px; width: 100%;border-spacing : 0;">
+      <tr>
+        <th width="80%" style="text-align: left;padding: 4px;">
+          {{'cette_annee' | translate | uppercase}} ({{annee}})</th>
+        <th width="20%" style=" text-align: right;">
+        </th>
+
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'recettes' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;"> {{ra | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'depenses' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;">{{da | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;padding: 4px;"></td>
+        <td style=" text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">
+          {{ta | number :'1.0-2'}}
+        </td>
+      </tr>
+    </table>
+
+
+  </div>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header translucent>
+
+</ion-header>
+
+<ion-content class="sign_content">
+  <div class="container">
+    <img src="assets/imgs/logo-login.png" />
+    <ion-item style="width: 100%;">
+      <ion-label style=" text-align: center;">Veuillez saisir votre code d'activation</ion-label>
+    </ion-item>
+    <form class="sign_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+
+      <ion-item>
+        <ion-icon name="md-call" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'phone_number' | translate }}" type="text" formControlName="phone" name="phone"
+          readonly>
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.phone">
+          <div class="error-message"
+            *ngIf="validations_form.get('phone').hasError(validation.type) && (validations_form.get('phone').dirty || validations_form.get('phone').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-icon name="md-lock" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'code_activation' | translate}}" type="text" formControlName="code"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.code_activation">
+          <div class="error-message"
+            *ngIf="validations_form.get('code').hasError(validation.type) && (validations_form.get('code').dirty || validations_form.get('code').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+
+      <ion-button expand="full" type="submit" [disabled]="!validations_form.valid" routerDirection="forward">
+        {{'activer' | translate}}
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

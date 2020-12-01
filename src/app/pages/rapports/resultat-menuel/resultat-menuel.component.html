@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'Resultat mensuel' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="periode-line">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" style="text-align: center;">
+      {{year}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="forward()">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="printable-area" id="printable-area">
+
+    <table style="margin: 10px 0px 0px 0px; width: 100%;border-spacing : 0;" *ngFor="let item of items">
+      <tr>
+        <th width="80%" style="text-align: left;padding: 4px;">
+          {{item.categorie | month}} {{year}}</th>
+        <th width="20%" style=" text-align: right;">
+        </th>
+
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'recettes' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;"> {{item.recette | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;padding: 4px;"> {{'depenses' | translate}}
+        </td>
+        <td style=" text-align: right;padding: 4px;">{{item.depense | number :'1.0-2'}}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">Resultat</td>
+        <td style=" text-align: right;padding: 4px;font-weight: bold;border-top: 1px solid #000;">
+          {{(item.recette-item.depense) | number :'1.0-2'}}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="no_items" *ngIf="items.length == 0">
+    <img src="assets/imgs/logo.png" class="no-item-logo">
+    <ion-text color="secondary">
+      <p>{{'no_items' | translate}}</p>
+    </ion-text>
+  </div>
+</ion-content>

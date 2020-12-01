@@ -1,0 +1,47 @@
+
+ion-item{
+    --inner-padding-end:var(--content-padding);
+    --padding-start:var(--content-padding);
+    --inner-border-width:0px;
+    --padding-top:var(--content-padding);
+    --padding-bottom:var(--content-padding); 
+    --background:var(--ion-color-medium-shade);
+    margin-top:var(--content-padding);
+    &:last-of-type{
+        margin-bottom:var(--content-padding);
+    }
+    ion-grid{
+        margin-bottom: var(--content-padding);
+        p{
+            margin:0px;
+            max-width:40vw;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        ion-col{
+            display: flex;
+            align-items: center;
+            
+        }
+    }
+    .container{
+        width:100%;
+        h4{
+            margin:0px 0px var(--content-padding);
+            max-width:100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        p{
+            margin:0px;
+            display: inline-block;
+            max-width:100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+    }
+}

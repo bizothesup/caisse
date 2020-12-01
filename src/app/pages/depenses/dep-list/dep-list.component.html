@@ -1,0 +1,40 @@
+<!-- <ion-virtual-scroll class="app_virtual_list" [items]="depenses" approxItemHeight="340px" no-padding> -->
+<ion-list class="app_virtual_list" no-padding>
+  <ion-card d *ngFor="let item of depenses">
+    <ion-card-content (click)="showItem(item)">
+      <ion-grid class="item_footer">
+        <ion-row>
+          <ion-col size="auto">
+            <div id="cercle" [style.background-color]="item.categorieColor">
+              <p class="ordre"></p>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-text>
+              <h4>{{item.categorieName}} </h4>
+              <p>Réf : {{item.ref}}</p>
+            </ion-text>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-text>
+              <p><span class="montant">{{item.prix | number :'1.0-2'}}</span> <span class="devise">FCFA</span></p>
+              <p><span class="green" *ngIf="item.payer==='true'"><i>
+                    {{'paye' | translate}}</i></span><span class="red" *ngIf="item.payer==='false'">
+                  <i>{{'non_paye' | translate}}</i></span></p>
+            </ion-text>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-list>
+<!-- </ion-virtual-scroll> -->
+<div class="no_items" *ngIf="depenses.length == 0">
+  <img src="assets/imgs/logo.png" class="no-item-logo">
+  <ion-text color="secondary">
+    <p>{{'no_items' | translate}}</p>
+  </ion-text>
+</div>

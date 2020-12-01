@@ -1,0 +1,47 @@
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: var(--ion-item-background,var(--ion-background-color,#fff));
+}
+.jour{
+    color: #fff;
+    font-size: 1.4rem !important;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px !important;
+    text-align: center;
+    padding: 10px 0px 0px 0px !important;
+}
+.mois{
+    color: #fff;
+    font-size: 0.9rem !important;
+    margin: 0px 0px 0px 0px !important;
+    text-align: center;
+    padding: 0px 0px 0px 0px !important;
+}
+#date {
+    margin: 0px 0px 0px 0px !important;
+    padding: 0px 0px 0px 0px !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    // background: green;
+    background:var(--ion-color-primary);
+    
+}
+  ion-header {
+    .periode-line{
+        color: #FFF;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        --background:var(--ion-color-primary);
+    } 
+
+}

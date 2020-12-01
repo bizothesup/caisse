@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'Dépenses par catégorie' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button color="light" (click)="createPdf()">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button> -->
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar no-padding class="scrolling_toolbar">
+    <ion-toolbar no-padding class="scrolling_toolbar">
+      <ion-segment scrollable [(ngModel)]="mySegment">
+        <ion-segment-button value="jour" (ionSelect)="selectedButton('jour')">
+          {{'jour' | translate | uppercase}}
+        </ion-segment-button>
+        <ion-segment-button value="semaine" (ionSelect)="selectedButton('semaine')">
+          {{'semaine' | translate | uppercase}}
+        </ion-segment-button>
+        <ion-segment-button value="mois" (ionSelect)="selectedButton('mois')">
+          {{'mois' | translate | uppercase}}
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item class="periode-line">
+      <ion-label style=" text-align: center;">{{periode}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-header>
+<ion-content padding>
+  <div class="printable-area" id="printable-area">
+
+    <table style="margin: 0; width: 100%;border-spacing : 0;">
+      <tr>
+        <th width="85%" style="text-align: left;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+          {{'categorie' | translate | uppercase}}</th>
+        <th width="15%"
+          style=" text-align: right;padding: 4px;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+          {{'montant' | translate | uppercase}}</th>
+
+      </tr>
+      <tr *ngFor="let item of depenses">
+        <td width="85%" style="text-align: left;padding: 4px;border-bottom: 1px solid #000;"> {{item.categorie}}</td>
+        <td width="15%" style=" text-align: right;padding: 4px;border-bottom: 1px solid #000;">
+          {{item.depense | number :'1.0-2'}}</td>
+      </tr>
+      <tr>
+        <td width="85%" style="text-align: right;padding: 4px;border-bottom: 1px solid #000;font-weight: bold;">
+          {{'total' | translate | uppercase}}</td>
+        <td width="15%" style=" text-align: right;padding: 4px;border-bottom: 1px solid #000;font-weight: bold;">
+          {{totDepense | number :'1.0-2'}}</td>
+      </tr>
+    </table>
+
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-list>
+    <ion-item lines="none">
+      <h3 class="total-label">{{'total' | translate | uppercase}} {{'depense' | translate | uppercase}}: </h3>
+      <h3 class="total-montant"> {{totDepense| number :'1.0-2'}} <span class="devise">FCFA</span></h3>
+    </ion-item>
+  </ion-list>
+</ion-footer>

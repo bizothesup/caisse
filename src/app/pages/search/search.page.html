@@ -1,0 +1,8 @@
+<ion-content>
+    <ion-searchbar placeholder="{{'search' | translate}}" (ionChange)="filterList($event)"></ion-searchbar>
+    <ion-list *ngIf="filterData.length != 0">
+        <ion-item *ngFor="let item of filterData" (click)="showItem(item)">
+            <ion-label>{{item.ref}}, {{item.categorieName}} ({{item.prix | number :'1.0-2'}})</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

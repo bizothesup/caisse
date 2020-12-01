@@ -1,0 +1,83 @@
+ion-card{ 
+    margin:0px;
+    border-radius:0px;
+    background: linear-gradient(to bottom, rgba(var(--ion-color-secondary-rgb),1) 0%, rgba(var(--ion-color-secondary-rgb),1) 60%, rgba(255,255,255,1) 50%); 
+    box-shadow:none;
+    ion-avatar{
+        width:160px;
+        height:160px;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        margin: 44px auto 10px;
+        .button{
+            position: absolute;
+            width:50px;
+            height: 50px;
+            --border-radius:50%; 
+            --padding-start:0px;
+            --padding-end:0px;
+        }
+    }
+    .card-content{
+        padding: var(--content-padding);
+        text-align: center;
+        h4,p{ 
+            white-space: nowrap;    overflow: hidden;
+            text-overflow: ellipsis;
+            max-width:100%;
+        } 
+         h4 {
+            font-weight:bold;
+        }
+    }
+}
+.profile_form{
+    background:var(--ion-color-medium-shade);
+    --ion-item-background:none;
+    padding:var(--content-padding) 0px;
+    margin-top:var(--content-padding);
+    ion-item{
+        --detail-icon-opacity: 0.85;
+        margin-bottom:calc(var(--content-padding)/2);
+        --padding-start:var(--content-padding);
+        --inner-padding-end:var(--content-padding); 
+        ion-label{
+            font-weight:bold;
+            font-size:1.3rem;
+            transform: none!important;
+        }
+        ion-input{
+            --placeholder-color:var(--ion-color-secondary)!important;
+            --placeholder-opacity:.8;
+        }
+        ion-button{
+            width:50px;
+            height:50px;
+            margin:0px!important;
+            --ripple-color:transparent!important; 
+            ion-icon{
+                font-size:1.8rem;
+            }
+        }
+        &.item-interactive-disabled{
+            ion-label{
+                opacity: .8;
+            }
+        }
+        
+    }
+}
+
+.error-message
+{
+  color: var(--ion-color-danger);
+  font-size: 1.2rem;
+  padding:0px var(--content-padding);
+  margin-bottom:var(--content-padding);
+}
+
+.submit-btn { 
+  margin:25px var(--content-padding) 0px; 
+}

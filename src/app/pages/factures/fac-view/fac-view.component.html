@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'facture' | translate}} [{{item.ref}}]
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="print()">
+        <ion-icon slot="icon-only" name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="printable-content">
+    <div class="printable-area" id="printable-area">
+      <h1 style="margin-left: 5px;">Facture</h1>
+      <table style="margin: 2%; width: 96%;border-spacing : 0;">
+        <tr>
+          <td width="30%" style="vertical-align: top;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Client:</dt>
+            <dd style="margin: 0;">{{item.abonneName}}</dd>
+            <dd style="margin: 0;">Tél:{{item.abonneTel}}</dd>
+            <dd style="margin: 0;">{{item.abonneAdresse}}</dd>
+          </td>
+          <td width="20%" style="vertical-align: top;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Réf:</dt>
+            <dd style="margin: 0;">{{item.ref}}</dd>
+          </td>
+          <td width="50%" style="vertical-align: top;text-align: right;">
+            <dt style="font-size: 11px;color: rgb(141, 139, 139); margin-bottom: 5px;">Montant Total:</dt>
+            <dd style="margin: 0;font-size: 20px;font-weight: bold;">{{item.montant | number :'1.0-2'}} FCFA</dd>
+          </td>
+        </tr>
+      </table>
+      <h3 style="margin-left: 5px; margin-top: 20px;font-size: 12px;">Détails facture</h3>
+      <table
+        style="margin: 2%; width: 96%;border-spacing : 0; border-top: 2px solid rgb(141, 139, 139); border-bottom: 2px solid rgb(141, 139, 139);">
+        <tr>
+          <th width="70%"
+            style="padding: 5px 0px 5px 0px; border-bottom: 2px solid rgb(141, 139, 139);text-align: left;">Description
+          </th>
+          <th width="30%"
+            style="padding: 5px 0px 5px 0px; border-bottom: 2px solid rgb(141, 139, 139);text-align: right;">Montant
+          </th>
+        </tr>
+        <tr>
+          <td style="padding: 5px 0px 5px 0px;text-align: left;">Période du {{item.dated | date:'dd/MM/yyyy'}} au
+            {{item.datef | date:'dd/MM/yyyy'}}</td>
+          <td style="padding: 5px 0px 5px 0px;text-align: right;">{{item.montant | number :'1.0-2'}}</td>
+        </tr>
+      </table>
+      <table style="margin: 2%; width: 96%;border-spacing : 0;">
+        <tr>
+          <td width="80%" style="padding: 5px 0px 5px 0px; text-align: right;font-weight: bold;">TOTAL A PAYER </td>
+          <td width="20%" style="padding: 5px 0px 5px 0px; text-align: right;font-weight: bold;">
+            {{item.montant | number :'1.0-2'}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-button color="secondary" expand="full" (click)="solderItem()" [disabled]="item.payer">
+          {{'solder' | translate}}</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button color="secondary" expand="full" (click)="detailItem()">
+          {{'details' | translate}}</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button color="primary" expand="full" (click)="deleteItem()">
+          {{'delete' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-footer>

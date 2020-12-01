@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" (click)="backTolist()"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'nouvelle_facture' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <form class="profile_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)"
+    #myForm2="ngForm">
+
+    <ion-item>
+      <ion-label position="stacked">{{'abonne' | translate }}</ion-label>
+      <ion-select formControlName="abonne" interface="action-sheet" (ngModelChange)="onChangeAbonne($event)">
+        <ion-select-option *ngFor="let item of abonnes" [value]="item.id">{{item.nom}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{'periode_du' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dated" (ngModelChange)="onChangeDateDebut($event)"
+        name="dated">
+      </ion-datetime>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.date">
+        <div class="error-message"
+          *ngIf="validations_form.get('dated').hasError(validation.type) && (validations_form.get('dated').dirty || validations_form.get('dated').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">{{'au' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="datef" (ngModelChange)="onChangeDateFin($event)"
+        name="datef">
+      </ion-datetime>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of global.validation_messages.date">
+        <div class="error-message"
+          *ngIf="validations_form.get('datef').hasError(validation.type) && (validations_form.get('datef').dirty || validations_form.get('datef').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">{{'reference' | translate }}</ion-label>
+      <ion-input formControlName="reference" placeholder="{{'reference' | translate }}" type="text" name="reference"
+        readonly="true">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{'montant' | translate }}</ion-label>
+      <ion-input formControlName="montant" placeholder="{{'montant' | translate }}" type="number" name="montant"
+        readonly="true">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{'facture_soldee' | translate }} ?</ion-label>
+      <ion-toggle formControlName="paye"></ion-toggle>
+    </ion-item>
+
+  </form>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button color="primary" expand="full" [disabled]="!validations_form.valid"
+          (click)="myForm2.ngSubmit.emit()">
+          {{'save' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-footer>

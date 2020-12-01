@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">
+      {{'rapports_statistiques' | translate}}
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-virtual-scroll class="app_virtual_list" [items]="items" approxItemHeight="340px" no-padding>
+    <ion-card *virtualItem="let item; let itemBounds = bounds;">
+      <ion-card-content (click)="showItem(item)">
+        <h4>{{item.nom}}</h4>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-virtual-scroll>
+
+</ion-content>

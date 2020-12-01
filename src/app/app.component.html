@@ -1,0 +1,93 @@
+<ion-app>
+  <div *ngIf="showSplash" class="splash">
+    <div class="spinner"><img src="assets/imgs/spinner.png"></div>
+  </div>
+  <ion-split-pane *ngIf="!showSplash">
+    <!-- ltr menu -->
+    <ion-menu side="start" menuId="leftMenu">
+      <ion-header>
+        <ion-toolbar>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/imgs/profile.png">
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="light">
+                <h4>{{structure.nom}}</h4>
+                <p>{{structure.tel}}</p>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of menu;let i = index" (click)="select(i)">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" [ngClass]="{'active':  i == global.selected}">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p['title_' + global.lang]}}
+                <!-- <ion-badge color="primary" slot="end" *ngIf="p.title_en=='NOTIFICATIONS'">5</ion-badge> -->
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <!-- <ion-list *ngIf="user.estadmin!==1">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages2;let i = index" (click)="select(i)">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" [ngClass]="{'active':  i == global.selected}">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p['title_' + global.lang]}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list> -->
+      </ion-content>
+      <ion-footer>
+        <ion-button fill="clear" color="secondary" (click)="sign_out()">{{'sign_out' | translate}}</ion-button>
+        <ion-button fill="clear" color="secondary" (click)="change_password()">{{'mot_de_passe' | translate}}
+        </ion-button>
+        <ion-button fill="clear" color="secondary" (click)="exitApp()">{{'quitter' | translate}}</ion-button>
+      </ion-footer>
+    </ion-menu>
+
+    <!-- rtl menu -->
+    <ion-menu side="end" menuId="rightMenu">
+      <ion-header>
+        <ion-toolbar>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/imgs/profile.png">
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="light">
+                <h4>{{structure.nom}}</h4>
+                <p>{{structure.tel}}</p>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages;let i = index" (click)="select(i)">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" [ngClass]="{'active':  i == global.selected}">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p['title_' + global.lang]}}
+                <ion-badge slot="end" color="primary" *ngIf="p.title_en=='NOTIFICATIONS'">3</ion-badge>
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+      <ion-footer>
+        <ion-button fill="clear" color="secondary" (click)="sign_out()">{{'sign_out' | translate}}</ion-button>
+        <ion-button fill="clear" color="secondary" (click)="change_password()">{{'mot_de_passe' | translate}}
+        </ion-button>
+        <ion-button fill="clear" color="secondary" (click)="exitApp()">{{'quitter' | translate}}</ion-button>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

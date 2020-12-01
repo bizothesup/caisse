@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">{{'settings' | translate}}</ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="setting_form">
+    <!-- select item -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label color="primary">{{'general' | translate}}</ion-label>
+      </ion-list-header>
+      <ion-item border-bottom>
+        <ion-label>{{'select_lang' | translate}}</ion-label>
+        <ion-select interface="popover" [(ngModel)]="global.lang" (ionChange)="global.change_lang(global.lang)">
+          <ion-select-option value="fr">Français</ion-select-option>
+          <ion-select-option value="en">English</ion-select-option>
+          <ion-select-option value="ar">اللغة العربية</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item border-bottom>
+        <ion-label>{{'story_text_size' | translate}}</ion-label>
+        <ion-select interface="popover" [(ngModel)]="global.font_size" (ionChange)="change_font_size()">
+          <ion-select-option value="small">{{'small' | translate}}</ion-select-option>
+          <ion-select-option value="normal">{{'normal' | translate}}</ion-select-option>
+          <ion-select-option value="big">{{'big' | translate}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item border-bottom>
+        <ion-label>{{'afficher_file_attente' | translate}}</ion-label>
+        <ion-toggle [(ngModel)]="global.file_attente" (ionChange)="change_file_attente()"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label color="primary">{{'sauvegarde_restauration' | translate}}</ion-label>
+      </ion-list-header>
+      <ion-item border-bottom>
+        <ion-label>{{'auto_sync' | translate}}</ion-label>
+        <ion-toggle [(ngModel)]="auto_sync"></ion-toggle>
+      </ion-item>
+      <ion-item border-bottom border-top>
+        <ion-label>{{'auto_back' | translate}}</ion-label>
+        <ion-toggle [(ngModel)]="auto_back"></ion-toggle>
+      </ion-item>
+      <ion-item border-bottom border-top>
+        <ion-button color="secondary" fill="clear" style="margin: 0;padding: 0;" (click)="sauvegarder_donnees()">
+          {{'sauvegarder_donnees' | translate}}
+        </ion-button>
+      </ion-item>
+      <ion-item border-bottom border-top>
+        <ion-button color="secondary" fill="clear" style="margin: 0;padding: 0;" (click)="restaurer_donnees()">
+          {{'restaurer_donnees' | translate}}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

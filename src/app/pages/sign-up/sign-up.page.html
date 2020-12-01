@@ -1,0 +1,71 @@
+<ion-header translucent>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="sign_content">
+  <div class="container">
+    <img src="assets/imgs/logo-login.png" />
+    <form class="sign_form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+      <ion-item>
+        <!-- <ion-label position="popover">{{'type_entreprise' | translate }}</ion-label> -->
+        <ion-icon name="md-cart" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-select formControlName="nature" interface="action-sheet" no-padding style="max-width: 100%;width: 100%;">
+          <ion-select-option value="C">{{'commerce_general' | translate}}</ion-select-option>
+          <ion-select-option value="P">{{'prestation_service' | translate}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- user name -->
+      <ion-item>
+        <ion-icon name="home" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'nom_commerce' | translate}}" type="text" formControlName="nom"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.nom">
+          <div class="error-message"
+            *ngIf="validations_form.get('nom').hasError(validation.type) && (validations_form.get('nom').dirty || validations_form.get('nom').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Email -->
+      <ion-item>
+        <ion-icon name="md-call" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'phone_number' | translate }}" formControlName="login" type="text" name="login">
+        </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.phone">
+          <div class="error-message"
+            *ngIf="validations_form.get('login').hasError(validation.type) && (validations_form.get('login').dirty || validations_form.get('login').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-icon name="md-mail" slot="start" color="secondary" margin-end></ion-icon>
+        <ion-input placeholder="{{'email' | translate }}" formControlName="email" type="email" name="email"></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of global.validation_messages.email">
+          <div class="error-message"
+            *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation['message_' + global.lang] }}
+          </div>
+        </ng-container>
+      </div>
+
+
+      <ion-button expand="full" type="submit" [disabled]="!validations_form.valid" routerDirection="forward" margin-top>
+        {{'create_account' | translate}}
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

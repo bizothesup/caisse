@@ -1,0 +1,24 @@
+#cercle {
+    margin: 0px 10px 0px 0px !important;
+    padding: 0px 0px 0px 0px !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;  
+}
+h4{
+    font-weight:bold;
+    margin:0;
+    max-width:100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:var(--ion-color-primary);
+  }
+.montant{   
+    font-weight: bold; ;
+    color: #000000;
+    padding-right: 5px;
+}
+ion-item-sliding{
+    padding: 0px 10px 0px 10px !important;
+}

@@ -1,0 +1,22 @@
+ion-item{
+    padding: 0px 10px 0px 10px !important;
+}
+ion-footer{
+    ion-grid {
+        margin: 0 !important;
+        padding: 0 !important;
+        ion-row {
+           vertical-align: bottom;
+           justify-content: center;
+           margin: 0 !important;
+           padding: 0 !important;
+
+           ion-col {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    
+       }
+   
+   }
+}
